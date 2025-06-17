@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>إحصائيات المستندات</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { margin-bottom: 20px; }
+    .stat { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>إحصائيات المستندات</h1>
+  <button onclick="loadStats()">تحميل الإحصائيات</button>
+  <div id="statsContainer"></div>
+
+  <script>
+    async function loadStats() {
+      const res = await fetch("/stats");
+      const stats = await res.json();
+      const container = document.getElementById("statsContainer");
+
+      function formatBytes(bytes) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+      }
+
+      container.innerHTML = `
+        <div class="stat">عدد المستندات: ${stats.numberOfDocuments}</div>
+        <div class="stat">الحجم الكلي: ${formatBytes(stats.totalSizeBytes)}</div>
+        <div class="stat">آخر وقت بحث: ${stats.lastSearchDurationMs} مللي ثانية</div>
+        <div class="stat">آخر وقت تصنيف: ${stats.lastClassificationDurationMs} مللي ثانية</div>
+        <div class="stat">آخر وقت فرز: ${stats.lastSortDurationMs} مللي ثانية</div>
+      `;
+    }
+  </script>
+</body>
+</html>

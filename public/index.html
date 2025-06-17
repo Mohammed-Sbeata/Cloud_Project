@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>البحث في المستندات</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <h1>بحث في المستندات</h1>
+  <input type="text" id="searchInput" placeholder="اكتب كلمات البحث" />
+  <button onclick="search()">بحث</button>
+  <div id="results"></div>
+
+  <script>
+    async function search() {
+      const query = document.getElementById("searchInput").value;
+      const res = await fetch(`/search?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = data.length
+        ? data.map(doc => `<div><h3>${doc.title}</h3><p>${doc.summary || ""}</p></div>`).join("")
+        : "<p>لا توجد نتائج</p>";
+    }
+  </script>
+</body>
+</html>

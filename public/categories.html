@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>عرض المستندات حسب التصنيف</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { margin-top: 30px; }
+    .document { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>المستندات المصنفة</h1>
+  <button onclick="loadDocuments()">تحميل المستندات</button>
+  <div id="docsContainer"></div>
+
+  <script>
+    async function loadDocuments() {
+      const res = await fetch("/documents");  // يفترض وجود مسار لإرجاع جميع المستندات
+      const docs = await res.json();
+      const container = document.getElementById("docsContainer");
+
+      const grouped = {};
+      docs.forEach(doc => {
+        const category = doc.category || "غير مصنف";
+        if (!grouped[category]) grouped[category] = [];
+        grouped[category].push(doc);
+      });
+
+      container.innerHTML = "";
+      for (const cat in grouped) {
+        container.innerHTML += `<h2>${cat}</h2>`;
+        grouped[cat].forEach(doc => {
+          container.innerHTML += `<div class="document">${doc.title}</div>`;
+        });
+      }
+    }
+  </script>
+</body>
+</html>
