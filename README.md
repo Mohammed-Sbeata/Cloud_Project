@@ -55,7 +55,20 @@ Documents are stored in Firestore with the following fields:
 **Instructor**: Dr. Rebhi S. Baraka  
 **University**: Islamic University of Gaza, Faculty of Information Technology  
 
+
+### Authors
+Developed by :
+- [Mohammed Sbeata](https://github.com/Mohammed-Sbeata)
+- [Malek Abo-Alqomoz](https://github.com/Malek-Alqomoz)
+- [Yousef Harara](https://github.com/Yousef-Harara)
+
+
+ 
+
+
 ## References
 - [Firebase Firestore](https://firebase.google.com/docs/firestore)
+- [Google Drive](https://drive.google.com/)
+- [Render Deploy](https://render.com/)
 - [pdf-parse NPM Package](https://www.npmjs.com/package/pdf-parse)
 - [Express.js](https://expressjs.com)
