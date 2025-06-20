@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <title>البحث في المستندات</title>
+  <title>Searching in Docx</title>
   <style>
     body { font-family: Arial, sans-serif; }
   </style>
 </head>
 <body>
-  <h1>بحث في المستندات</h1>
-  <input type="text" id="searchInput" placeholder="اكتب كلمات البحث" />
-  <button onclick="search()">بحث</button>
+  <h1>Search in Docx</h1>
+  <input type="text" id="searchInput" placeholder="Search here !!" />
+  <button onclick="search()">Searching ...</button>
   <div id="results"></div>
 
   <script>
@@ -26,4 +26,119 @@
     }
   </script>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        width: 300px;
+      }
+      button {
+        padding: 10px 15px;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔍 Document Search</h1>
+    <input type="text" id="keyword" placeholder="Enter keyword to search..." />
+    <button onclick="search()">Search</button>
+
+    <div id="results"></div>
+    <a
+      href="/sort"
+      style="
+        display: block;
+        width: fit-content;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-top: 20px;
+        color: rgb(49, 39, 44);
+        background-color: #d7fff6;
+        padding: 8px 22px;
+      "
+      >Sort</a
+    >
+    <a
+      href="/classify"
+      style="
+        display: block;
+        width: fit-content;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-top: 20px;
+        color: rgb(49, 39, 44);
+        background-color: #d7fff6;
+        padding: 8px 22px;
+      "
+      >Classify</a
+    >
+    <a
+      href="/upload.html"
+      style="
+        display: block;
+        width: fit-content;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-top: 20px;
+        color: rgb(49, 39, 44);
+        background-color: #d7fff6;
+        padding: 8px 22px;
+      "
+      >upload</a
+    >
+
+    <script>
+      async function search() {
+        const keyword = document.getElementById("keyword").value;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "Searching...";
+
+        try {
+          const res = await fetch(
+            `/search?keyword=${encodeURIComponent(keyword)}`
+          );
+          const data = await res.json();
+
+          if (data.error) {
+            resultsDiv.innerHTML = `<p style="color:red;">${data.error}</p>`;
+            return;
+          }
+
+          if (data.length === 0) {
+            resultsDiv.innerHTML = "<p>No results found.</p>";
+            return;
+          }
+
+          resultsDiv.innerHTML = data
+            .map(
+              (item) => `
+          <div class="result">
+            <strong>📄 File:</strong> ${item.file} <br />
+            <strong>📝 Preview:</strong> ${item.preview}
+          </div>
+        `
+            )
+            .join("");
+        } catch (err) {
+          resultsDiv.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
+        }
+      }
+    </script>
+  </body>
 </html>

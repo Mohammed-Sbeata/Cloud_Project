@@ -1,8 +1,18 @@
+
+require('dotenv').config();
+
+
+
+
+const sortRoutes = require("./routes/sortRoutes");
 const express = require("express");
 const app = express();
+const authRoutes = require("./routes/authRoutes");
 
 app.use(express.json());
 app.use(express.static("public"));
+app.use(authRoutes);
+app.use(sortRoutes);
 
 // استيراد المسارات
 const uploadRoutes = require("./routes/uploadRoutes");

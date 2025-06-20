@@ -1,0 +1,86 @@
+<!-- public/upload.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload PDF/Docx</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #response {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>📤 Upload PDF or DOCX</h2>
+  <form id="uploadForm" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf,.docx" required />
+    <br />
+    <button type="submit">Upload</button>
+  </form>
+
+  <div id="response"></div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const responseDiv = document.getElementById('response');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const res = await fetch('/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await res.json();
+      if (result.error) {
+        responseDiv.textContent = "❌ " + result.error;
+        responseDiv.style.color = 'red';
+      } else {
+        responseDiv.textContent = "✅ File uploaded successfully!";
+        responseDiv.style.color = 'green';
+      }
+    });
+  </script>
+</body>
+</html>

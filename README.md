@@ -14,7 +14,7 @@ This project is a cloud-based web application for uploading, parsing, searching,
 ### Technologies
 
 - Node.js + Express.js
-- Firebase Firestore and Storage
+- Firebase upload FrontEnd
 - PDF-parse and mammoth for document parsing
 - HTML, CSS, Vanilla JS
 
