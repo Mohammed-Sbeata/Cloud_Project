@@ -1,79 +1,61 @@
-### Cloud-Based Document Analytics Service
+# Cloud-Based Document Analytics Service
 
-This project is a cloud-based web application for uploading, parsing, searching, sorting, and classifying large collections of PDF and Word documents. It uses Firebase as the backend, Node.js/Express for the server, and HTML/CSS/JavaScript for the frontend.
+## Project Overview
+This project is a cloud-based service designed for managing and analyzing large collections of documents (PDFs and Word files). It enables users to upload, search, sort, and classify documents efficiently using cloud storage and processing resources. The system highlights search results within documents and provides statistical insights such as document counts, sizes, and processing times.
 
-### Features
+## Key Features
+- **Document Upload**: Supports PDF and Word file uploads via web interface or API.
+- **Search Functionality**: Performs keyword-based searches with highlighted results.
+- **Sorting**: Sorts documents by extracted titles.
+- **Classification**: Automatically classifies documents based on predefined categories and keyword matching.
+- **Statistics Dashboard**: Displays metadata like total documents, storage size, and processing times.
 
-- Upload PDF and DOCX documents
-- Automatically extract and store document title and content in Firebase
-- Search documents by keywords (with highlighted results)
-- Sort documents by extracted title
-- Classify documents based on categories (tree-like structure)
-- View statistics (number of docs, total size, search time, etc.)
+## Technologies Used
+- **Backend**: Node.js with Express.js
+- **Database**: Firebase Firestore (NoSQL)
+- **Document Parsing**: 
+  - `pdf-parse` for PDFs
+  - `mammoth` for Word files
+- **Frontend**: Vanilla JavaScript and HTML
+- **Deployment**: 
+  - Backend: Render (or Heroku/Google Cloud Run)
+  - Frontend: Firebase Hosting or embedded in Express app
 
-### Technologies
+## System Architecture
+The service follows a client-server model:
+1. **Frontend**: Simple web interface for user interactions.
+2. **Backend**: RESTful API handling file uploads, text extraction, and database operations.
+3. **Cloud Services**: 
+   - Firebase Firestore for data storage.
+   - Cloud platform (Render/Heroku) for backend hosting.
 
-- Node.js + Express.js
-- Firebase upload FrontEnd
-- PDF-parse and mammoth for document parsing
-- HTML, CSS, Vanilla JS
+## Database Design
+Documents are stored in Firestore with the following fields:
+- `title` (string)
+- `content` (string)
+- `category` (string)
+- `size` (number)
+- `uploadDate` (timestamp)
 
-### How to Run
+## How to Run the Project
+1. **Live Demo**: Access the deployed project [here](https://cloud-project-2twj.onrender.com/).
+2. **Source Code**: Clone the repository from [GitHub](https://github.com/Mohammed-Sbeata/Cloud_Project.git).
 
-1. Clone the repo:
-```bash
-git clone https://github.com/your-user/your-repo.git
-cd your-repo
-```
+## Future Enhancements
+- Implement machine learning for advanced document classification.
+- Support additional file formats (e.g., Excel, PowerPoint).
+- Improve UI/UX for better user experience.
 
-## Install dependencies:
-```
-npm install
+## Contributors
+- Malek Hossam Abo Al-Qumboz (120191034)
+- Mohameed Majed Sheata (120210748)
+- Yousef Gazi Harara (120211259)
 
-```
-## Add your Firebase credentials file:
+**Course**: Cloud and Distributed Systems (SICT 4313)  
+**Instructor**: Dr. Rebhi S. Baraka  
+**University**: Islamic University of Gaza, Faculty of Information Technology  
 
-```
-project-root/
-└── serviceAccountKey.json
-
-```
-
-## Run the server:
-
-```
-node src/app.js
-
-```
-
-## Open http://localhost:3000 in your browser.
-
-### Folder Structure
-
-```
-project-root/
-├── src/
-│   ├── controllers/
-│   ├── routes/
-│   ├── config/
-│   └── app.js
-├── public/
-│   ├── index.html
-│   ├── categories.html
-│   ├── stats.html
-│   └── style.css
-├── uploads/
-├── serviceAccountKey.json
-├── package.json
-└── README.md
-
-```
-
-### Author
-Developed by :
-- [Mohammed Sbeata](https://github.com/Mohammed-Sbeata)
-- [Malek Abo-Alqomoz](https://github.com/Malek-Alqomoz)
-- [Yousef Harara](https://github.com/Yousef-Harara)
-
-- Islamic University of Gaza — Cloud & Distributed Systems Project
-
+## References
+- [Firebase Firestore](https://firebase.google.com/docs/firestore)
+- [pdf-parse NPM Package](https://www.npmjs.com/package/pdf-parse)
+- [Express.js](https://expressjs.com)
